@@ -19,6 +19,8 @@
 ##### For JWT Token generation
 - JWT_SECRET                                `Random string`
 
+#### Documentation:
+- [Swagger](http://localhost:8080/swagger-ui/index.html)
 
 
 #### Created by:

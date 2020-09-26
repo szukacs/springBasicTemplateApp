@@ -50,6 +50,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.csrf().disable().cors().and()
         .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
         .and().authorizeRequests().antMatchers("/users/login", "/users/register", "/users/image/**", "/confirm").permitAll()
+        .and().authorizeRequests().antMatchers("/swagger-resources/**","/swagger-ui/**", "/v2/api-docs", "/webjars/**").permitAll()
         .anyRequest().authenticated()
         .and()
         .exceptionHandling().accessDeniedHandler(jwtAccessDeniedHandler)
