@@ -49,7 +49,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable().cors().and()
         .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-        .and().authorizeRequests().antMatchers("/user/login", "/user/register", "/user/image/**", "/confirm").permitAll()
+        .and().authorizeRequests().antMatchers("/users/login", "/users/register", "/users/image/**", "/confirm").permitAll()
         .and().authorizeRequests().antMatchers("/swagger-resources/**","/swagger-ui/**", "/v2/api-docs", "/webjars/**").permitAll()
         .anyRequest().authenticated()
         .and()
