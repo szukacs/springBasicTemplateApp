@@ -35,8 +35,8 @@ import java.nio.file.Paths;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = {"/", "/user"})
-public class UserController extends UserExceptionHandler {
+@RequestMapping(path = {"/users"})
+public class UserController {
 
     private UserService userService;
     private AuthenticationManager authenticationManager;
@@ -89,7 +89,7 @@ public class UserController extends UserExceptionHandler {
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
-    @GetMapping("/all")
+    @GetMapping("")
     public ResponseEntity<List<User>> findAllUser() {
         List<User> users = userService.getUsers();
         return new ResponseEntity<>(users, HttpStatus.OK);
