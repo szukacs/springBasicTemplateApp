@@ -62,7 +62,7 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<?> register(@RequestBody RegistrationDTO userRegDTO) throws UserManipulationException {
+    public ResponseEntity<?> register(@RequestBody RegistrationDTO userRegDTO) throws UserManipulationException, IOException {
         User newUser = userService.register(userRegDTO);
         ConfirmationToken confTok = confirmationTokenService.saveConfirmationToken(new ConfirmationToken(newUser));
         emailSenderServiceImpl.sendVerificationEmailHTML(newUser,confTok);

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import java.io.IOException;
 import java.util.Properties;
 
 @Service("emailSenderService")
@@ -26,17 +27,17 @@ public class EmailSenderServiceImpl implements EmailSenderService {
     }
 
     @Override
-    public void sendVerificationEmailHTML(User user, ConfirmationToken confirmationToken) {
+    public void sendVerificationEmailHTML(User user, ConfirmationToken confirmationToken) throws IOException {
         String to = user.getEmail();
         String subject = "Complete Registration!";
 
         // Send message
-        sendHTMLEmail(generateHTMLMessage(to, subject, EmailTemplates.VERIFICATION_EMAIL(user,confirmationToken)));
+        sendHTMLEmail(generateHTMLMessage(to, subject, EmailTemplateService.VERIFICATION_EMAIL(user, confirmationToken)));
         System.out.println("Sent message successfully....");
         LOGGER.info("Sent VerificationEmailHTML successfully");
     }
 
-    private Message generateHTMLMessage(String to, String subject, String template){
+    private Message generateHTMLMessage(String to, String subject, String template) {
         // Sender's email ID needs to be mentioned
         String from = System.getenv("EMAIL_USERNAME");
 
