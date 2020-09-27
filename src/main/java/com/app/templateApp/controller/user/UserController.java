@@ -65,7 +65,7 @@ public class UserController {
     public ResponseEntity<?> register(@RequestBody RegistrationDTO userRegDTO) throws UserManipulationException {
         User newUser = userService.register(userRegDTO);
         ConfirmationToken confTok = confirmationTokenService.saveConfirmationToken(new ConfirmationToken(newUser));
-        emailSenderServiceImpl.sendVerificationEmail(newUser, confTok);
+        emailSenderServiceImpl.sendVerificationEmailHTML(newUser,confTok);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
