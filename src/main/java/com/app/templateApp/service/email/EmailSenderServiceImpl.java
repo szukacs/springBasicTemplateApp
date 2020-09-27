@@ -25,7 +25,7 @@ public class EmailSenderServiceImpl implements EmailSenderService {
         mailMessage.setSubject("Complete Registration!");
         mailMessage.setFrom(System.getenv("EMAIL_USERNAME"));
         mailMessage.setText("Hello " + user.getUserName() + " , \n \nTo confirm your account, please click here : "
-                + SecurityConstant.APP_BASE_URL +"/confirm?token=" + confirmationToken.getConfirmationToken() + " \n \nThe Zupper team!");
+                + SecurityConstant.APP_BASE_URL +"/users/confirm?token=" + confirmationToken.getConfirmationToken() + " \n \nThe Zupper team!");
         sendEmail(mailMessage);
     }
 
