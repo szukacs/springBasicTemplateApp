@@ -87,7 +87,7 @@ public class EmailSenderServiceImpl implements EmailSenderService {
     }
 
     private Properties generateGmailProperties() {
-        // Assuming you are sending email through relay.jangosmtp.net
+        // Assuming you are sending email through smtp.gmail.com
         String host = "smtp.gmail.com";
 
         Properties props = new Properties();
