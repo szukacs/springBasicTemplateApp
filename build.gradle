@@ -33,7 +33,6 @@ dependencies {
 
 //Mail sender
 	compile group: 'javax.mail', name: 'mail', version: '1.4.7'
-	compile group: 'org.springframework.boot', name: 'spring-boot-starter-mail', version: '1.2.0.RELEASE'
 
 //Swagger
 	implementation "io.springfox:springfox-boot-starter:3.0.0"

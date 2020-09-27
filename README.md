@@ -7,7 +7,6 @@
 ### Environment variable:
 
 ##### For Database
-- HIBERNATE_DIALECT                         `org.hibernate.dialect.MySQL5Dialect`
 - DATASOURCE_URL                            `jdbc:mysql://localhost/zupper?serverTimezone=UTC`
 - DATASOURCE_USERNAME                       `Your database username`
 - DATASOURCE_PASSWORD                       `Your database password`
