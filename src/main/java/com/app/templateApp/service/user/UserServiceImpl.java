@@ -16,6 +16,8 @@ import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.context.event.ApplicationReadyEvent;
+import org.springframework.context.event.EventListener;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -161,6 +163,17 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         userRepository.save(user);
     }
 
+    @EventListener(ApplicationReadyEvent.class)
+    public void createFirstAdmin() {
+        createUser("user", "user", Role.ROLE_USER);
+        createUser("admin", "admin", Role.ROLE_SUPER_ADMIN);
+    }
+
+    public void createUser(String userName, String password, Role role) {
+        User user = new User(userName, password, role.name(), true, true);
+        userRepository.save(user);
+    }
+
     private void saveProfileImg(User user, MultipartFile profileImageUrl) throws IOException {
         if (profileImageUrl != null) {
             Path userFolder = Paths.get(FileConstant.USER_FOLDER + user.getUserName()).toAbsolutePath().normalize();
@@ -202,7 +215,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     private void registrationValidation(String username, String email) throws UsernameExistException, EmailExistException {
-        if (StringUtils.isNoneBlank(username)){
+        if (StringUtils.isNoneBlank(username)) {
             User userByUserName = userRepository.findUserByUserName(username);
             User userByEmail = userRepository.findUserByEmail(email);
             if (userByUserName != null) {

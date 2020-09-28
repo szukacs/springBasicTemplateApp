@@ -43,4 +43,12 @@ public class User implements Serializable {
     private String[] authorities;
     private Boolean active;
     private Boolean notLocked;
+
+    public User(String userName, String password, String role, Boolean active, Boolean notLocked) {
+        this.userName = userName;
+        this.password = password;
+        this.role = role;
+        this.active = active;
+        this.notLocked = notLocked;
+    }
 }
