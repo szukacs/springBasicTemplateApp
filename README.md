@@ -7,7 +7,7 @@
 ### Environment variable:
 
 ##### For Database
-- DATASOURCE_URL                            `jdbc:mysql://localhost/zupper?serverTimezone=UTC`
+- DATASOURCE_URL                            `Your datasource url`
 - DATASOURCE_USERNAME                       `Your database username`
 - DATASOURCE_PASSWORD                       `Your database password`
 
