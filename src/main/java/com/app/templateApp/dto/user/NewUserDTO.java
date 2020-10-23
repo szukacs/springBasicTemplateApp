@@ -1,6 +1,7 @@
 package com.app.templateApp.dto.user;
 
 import com.app.templateApp.entity.user.Gender;
+import com.app.templateApp.security.Role;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,8 +21,6 @@ public class NewUserDTO {
     private String password;
     private String email;
     private MultipartFile profileImageUrl;
-    private String role;
-    private String[] authorities;
+    private Role role;
     private Boolean active;
-    private Boolean notLocked;
 }

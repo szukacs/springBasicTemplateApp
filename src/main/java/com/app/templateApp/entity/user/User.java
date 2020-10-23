@@ -1,5 +1,6 @@
 package com.app.templateApp.entity.user;
 
+import com.app.templateApp.security.Role;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -34,21 +35,19 @@ public class User implements Serializable {
     private String firstName;
     private String lastName;
     private Integer age;
-    private Gender gender;
+    private Gender gender = Gender.UNKNOWN;
     private String profileImageUrl;
     private Date lastLoginDate;
     private Date lastLoginDateDisplay;
     private Date joinDate;
-    private String role;
-    private String[] authorities;
-    private Boolean active;
-    private Boolean notLocked;
+    private Role role;
+    private Boolean active = false;
+    private Boolean locked = false;
 
-    public User(String userName, String password, String role, Boolean active, Boolean notLocked) {
+    public User(String userName, String password, Role role, Boolean active) {
         this.userName = userName;
         this.password = password;
         this.role = role;
         this.active = active;
-        this.notLocked = notLocked;
     }
 }

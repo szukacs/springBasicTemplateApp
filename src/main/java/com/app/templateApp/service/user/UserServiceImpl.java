@@ -83,11 +83,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         User user = modelMapper.map(registrationDTO, User.class);
         user.setJoinDate(new Date());
         user.setPassword(encodePassword(registrationDTO.getPassword()));
-        user.setActive(false);
-        user.setGender(Gender.UNKNOWN);
-        user.setNotLocked(true);
-        user.setRole(Role.ROLE_USER.name());
-        user.setAuthorities(Role.ROLE_USER.getAuthorities());
+        user.setRole(Role.ROLE_USER);
         user.setProfileImageUrl(getTemporaryProfileImageUrl(registrationDTO.getUserName()));
         userRepository.save(user);
         LOGGER.info("New user created: " + registrationDTO.getUserName());
@@ -170,7 +166,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     public void createUser(String userName, String password, Role role) {
-        User user = new User(userName, password, role.name(), true, true);
+        User user = new User(userName, password, role, true);
         userRepository.save(user);
     }
 
@@ -203,14 +199,12 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     private void validateLoginAttempt(User user) {
-        if (user.getNotLocked()) {
-            if (loginAttemptService.hasExceededMaxAttempts(user.getUserName())) {
-                user.setNotLocked(false);
-            } else {
-                user.setNotLocked(true);
-            }
-        } else {
+        if (user.getLocked()) {
             loginAttemptService.evictUserFromLoginAttemptCache(user.getUserName());
+        } else {
+            if (loginAttemptService.hasExceededMaxAttempts(user.getUserName())) {
+                user.setLocked(true);
+            }
         }
     }
 

@@ -16,7 +16,7 @@ public class UserPrincipal implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return stream(this.user.getAuthorities()).map(SimpleGrantedAuthority::new).collect(Collectors.toList());
+        return stream(this.user.getRole().getAuthorities()).map(SimpleGrantedAuthority::new).collect(Collectors.toList());
     }
 
     @Override
@@ -36,7 +36,7 @@ public class UserPrincipal implements UserDetails {
 
     @Override
     public boolean isAccountNonLocked() {
-        return this.user.getNotLocked();
+        return !this.user.getLocked();
     }
 
     @Override

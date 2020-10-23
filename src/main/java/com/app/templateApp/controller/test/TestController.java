@@ -17,7 +17,7 @@ public class TestController {
     }
 
     @GetMapping("/testAdmin")
-    @PreAuthorize("hasAnyAuthority('user:update')")
+    @PreAuthorize("hasAnyAuthority('admin')")
     ResponseEntity<?> testAdmin(){
         return new ResponseEntity<>("okéAdmin", HttpStatus.OK);
     }
